@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name       Heardle Auto-Skip
-// @version    1.0.0
+// @version    1.0.1
 // @namespace  https://github.com/zttalk/
 // @updateURL  https://github.com/zttalk/heardle-userscripts/raw/main/heardle-autoskip.user.js
 // @match      https://*.heardledecades.com/
@@ -27,7 +27,7 @@ const obsLoad = new MutationObserver(function (mutations) {
 			if (!("querySelector" in addedNode)) {
 				continue
 			}
-			bar = addedNode.parentNode?.querySelector(".h-3")?.childNodes[0]?.childNodes[0];
+			bar = addedNode.parentNode?.querySelector(".h-3")?.childNodes?.[0]?.childNodes?.[0];
 			if (bar) {
 				console.log("Found bar.", bar);
 				obsLoad.disconnect();
