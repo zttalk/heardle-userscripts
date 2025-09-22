@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Heardle Auto-Skip
-// @description  Automatically triggers a skip instead of halting playback at a boundary. Press PageUp/PageDown to disable auto-skip and enter a guess. Also removes the tutorial pop-up and autofocuses the play button.
-// @version      1.0.2
+// @description  Automatically triggers a skip instead of halting playback at a boundary. Press PageUp/PageDown/Arrow to disable auto-skip and enter a guess. Also removes the tutorial pop-up and autofocuses the play button.
+// @version      1.0.3
 // @namespace    https://github.com/zttalk/
 // @updateURL    https://github.com/zttalk/heardle-userscripts/raw/main/heardle-autoskip.user.js
 // @match        https://*.heardledecades.com/
@@ -96,9 +96,7 @@ const obsProgress = new MutationObserver(function (mutations) {
 });
 
 document.addEventListener("keydown", function(e) {
-	if (!e.ctrlKey && ["PageUp", "PageDown"].includes(e.code)) {
-		e.stopImmediatePropagation();
-		e.preventDefault();
+	if (!e.ctrlKey && ["PageUp", "PageDown", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.code)) {
 		if (autoSkipping && statusElement) {
 			autoSkipping = false;
 			statusElement.innerText = "Auto-skip disabled";
