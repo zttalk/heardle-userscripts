@@ -1,15 +1,18 @@
 // ==UserScript==
-// @name       Heardle Auto-Skip
-// @version    1.0.1
-// @namespace  https://github.com/zttalk/
-// @updateURL  https://github.com/zttalk/heardle-userscripts/raw/main/heardle-autoskip.user.js
-// @match      https://*.heardledecades.com/
-// @match      https://*.heardledecades.xyz/
-// @match      https://*.heardlegames.xyz/
-// @match      https://heardle80s.com/
-// @match      https://reheardle.xyz/
-// @grant      none
+// @name         Heardle Auto-Skip
+// @description  Automatically triggers a skip instead of halting playback at a boundary. Press PageUp/PageDown to disable auto-skip and enter a guess. Also removes the tutorial pop-up and autofocuses the play button.
+// @version      1.0.2
+// @namespace    https://github.com/zttalk/
+// @updateURL    https://github.com/zttalk/heardle-userscripts/raw/main/heardle-autoskip.user.js
+// @match        https://*.heardledecades.com/
+// @match        https://*.heardledecades.xyz/
+// @match        https://*.heardlegames.xyz/
+// @match        https://heardle80s.com/
+// @match        https://reheardle.xyz/
+// @grant        none
 // ==/UserScript==
+
+"use strict";
 
 let bar;
 let recentProgress = [];
@@ -25,7 +28,7 @@ const obsLoad = new MutationObserver(function (mutations) {
 	for (const mutation of mutations) {
 		for (const addedNode of mutation.addedNodes) {
 			if (!("querySelector" in addedNode)) {
-				continue
+				continue;
 			}
 			bar = addedNode.parentNode?.querySelector(".h-3")?.childNodes?.[0]?.childNodes?.[0];
 			if (bar) {
