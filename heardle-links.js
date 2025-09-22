@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Heardle Links
 // @description  Adds links to YouTube and lyrics to the solution page.
-// @version      1.0.0
+// @version      1.0.1
 // @namespace    https://github.com/zttalk/
 // @updateURL    https://github.com/zttalk/heardle-userscripts/raw/main/heardle-links.user.js
 // @match        https://*.heardledecades.com/
@@ -31,11 +31,14 @@ function findSolution(context) {
 	if (done) {
 		return true;
 	}
-	let e = context.querySelector("div.p-2.rounded-sm.bg-custom-mg");
+	let e = context.querySelector("div.p-2.rounded-sm.bg-custom-mg > div.flex-1.mx-3.text-white");
+	if (!e) {
+		e = context.querySelector("div.p-2.rounded-sm.bg-custom-positive > div.flex-1.mx-3.text-white");
+	}
 	if (!e) {
 		return false;
 	}
-	e = e.parentNode;
+	e = e.parentNode.parentNode;
 	if (e.tagName === "A") {
 		e = e.parentNode;
 	}
