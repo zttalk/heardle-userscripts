@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Heardle Color Fix
-// @description  Ensures the "middle" color's brightness is below a certain threshold.
-// @version      1.0.0
+// @description  Ensures the "middle" color's brightness is below a certain threshold. Also adds an outline to the solution text.
+// @version      1.1.0
 // @namespace    https://github.com/zttalk/
 // @updateURL    https://github.com/zttalk/heardle-userscripts/raw/main/heardle-colorfix.user.js
 // @match        https://*.heardledecades.com/
@@ -14,7 +14,7 @@
 
 "use strict";
 
-const maxWhitenessMg = 0.4;
+const maxWhitenessMg = 0.3;
 
 function parseColorVariable(cvarname) {
 	const val = getComputedStyle(document.body).getPropertyValue(cvarname);
@@ -45,9 +45,10 @@ if (colorMg) {
 	}
 }
 
+const style = document.createElement("style");
+document.head.appendChild(style);
+style.sheet.insertRule("div.p-2.rounded-sm.bg-custom-mg > div.flex-1.mx-3.text-white, div.p-2.rounded-sm.bg-custom-positive > div.flex-1.mx-3.text-white { text-shadow: -1px +1px 0 #000, +1px +1px 0 #000, +1px -1px 0 #000, -1px -1px 0 #000; }");
 if (newValues) {
-	const style = document.createElement("style");
-	document.head.appendChild(style);
 	style.sheet.insertRule(`:root { ${newValues} }`);
 	console.log("Updated color variables:", newValues);
 }
